@@ -1,6 +1,7 @@
 package br.com.br.saga.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Usuario {
     private Long id;
@@ -63,6 +64,19 @@ public class Usuario {
     public Usuario setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(id, usuario.id) && Objects.equals(email, usuario.email) && Objects.equals(nome, usuario.nome) && Objects.equals(senha, usuario.senha) && Objects.equals(dataNascimento, usuario.dataNascimento);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, email, nome, senha, dataNascimento);
     }
 
     @Override

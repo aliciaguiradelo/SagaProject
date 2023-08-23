@@ -1,6 +1,7 @@
 package br.com.br.saga.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Filme {
     private Long id;
@@ -107,6 +108,19 @@ public class Filme {
     public Filme setIdCategoria(Long idCategoria) {
         this.idCategoria = idCategoria;
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Filme filme = (Filme) o;
+        return faixaEtaria == filme.faixaEtaria && Objects.equals(id, filme.id) && Objects.equals(titulo, filme.titulo) && Objects.equals(sinopse, filme.sinopse) && Objects.equals(diretor, filme.diretor) && Objects.equals(duracao, filme.duracao) && Objects.equals(dataEstreia, filme.dataEstreia) && Objects.equals(caminhoBanner, filme.caminhoBanner) && Objects.equals(idCategoria, filme.idCategoria);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, titulo, sinopse, diretor, duracao, dataEstreia, caminhoBanner, faixaEtaria, idCategoria);
     }
 
     @Override
