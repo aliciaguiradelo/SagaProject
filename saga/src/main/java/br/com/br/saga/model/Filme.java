@@ -1,89 +1,126 @@
 package br.com.br.saga.model;
 
-public class Filme {
-    private int id;
-    private String titulo;
-    private String descricao;
-    private String diretor;
+import java.time.LocalDate;
 
-    public Filme(int id, String titulo, String descricao, String diretor) {
-        this.id = id;
-        this.titulo = titulo;
-        this.descricao = descricao;
-        this.diretor = diretor;
-    }
+public class Filme {
+    private Long id;
+    private String titulo;
+    private String sinopse;
+    private String diretor;
+    private String duracao;
+    private LocalDate dataEstreia;
+    private String caminhoBanner;
+    private int faixaEtaria;
+    private Long idCategoria;
 
     public Filme() {
     }
-    
-    public int getId() {
+
+    public Filme(Long id, String titulo, String sinopse, String diretor, String duracao, LocalDate dataEstreia, String caminhoBanner, int faixaEtaria, Long idCategoria) {
+        this.id = id;
+        this.titulo = titulo;
+        this.sinopse = sinopse;
+        this.diretor = diretor;
+        this.duracao = duracao;
+        this.dataEstreia = dataEstreia;
+        this.caminhoBanner = caminhoBanner;
+        this.faixaEtaria = faixaEtaria;
+        this.idCategoria = idCategoria;
+    }
+
+    public Long getId() {
         return id;
     }
-    public void setId(int id) {
+
+    public Filme setId(Long id) {
         this.id = id;
+        return this;
     }
+
     public String getTitulo() {
         return titulo;
     }
-    public void setTitulo(String titulo) {
+
+    public Filme setTitulo(String titulo) {
         this.titulo = titulo;
+        return this;
     }
-    public String getDescricao() {
-        return descricao;
+
+    public String getSinopse() {
+        return sinopse;
     }
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+
+    public Filme setSinopse(String sinopse) {
+        this.sinopse = sinopse;
+        return this;
     }
+
     public String getDiretor() {
         return diretor;
     }
-    public void setDiretor(String diretor) {
+
+    public Filme setDiretor(String diretor) {
         this.diretor = diretor;
+        return this;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + id;
-        result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
-        result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
-        result = prime * result + ((diretor == null) ? 0 : diretor.hashCode());
-        return result;
+    public String getDuracao() {
+        return duracao;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Filme other = (Filme) obj;
-        if (id != other.id)
-            return false;
-        if (titulo == null) {
-            if (other.titulo != null)
-                return false;
-        } else if (!titulo.equals(other.titulo))
-            return false;
-        if (descricao == null) {
-            if (other.descricao != null)
-                return false;
-        } else if (!descricao.equals(other.descricao))
-            return false;
-        if (diretor == null) {
-            if (other.diretor != null)
-                return false;
-        } else if (!diretor.equals(other.diretor))
-            return false;
-        return true;
+    public Filme setDuracao(String duracao) {
+        this.duracao = duracao;
+        return this;
+    }
+
+    public LocalDate getDataEstreia() {
+        return dataEstreia;
+    }
+
+    public Filme setDataEstreia(LocalDate dataEstreia) {
+        this.dataEstreia = dataEstreia;
+        return this;
+    }
+
+    public String getCaminhoBanner() {
+        return caminhoBanner;
+    }
+
+    public Filme setCaminhoBanner(String caminhoBanner) {
+        this.caminhoBanner = caminhoBanner;
+        return this;
+    }
+
+    public int getFaixaEtaria() {
+        return faixaEtaria;
+    }
+
+    public Filme setFaixaEtaria(int faixaEtaria) {
+        this.faixaEtaria = faixaEtaria;
+        return this;
+    }
+
+    public Long getIdCategoria() {
+        return idCategoria;
+    }
+
+    public Filme setIdCategoria(Long idCategoria) {
+        this.idCategoria = idCategoria;
+        return this;
     }
 
     @Override
     public String toString() {
-        return "Filme [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", diretor=" + diretor + "]";
+        return "Filme{" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                ", sinopse='" + sinopse + '\'' +
+                ", diretor='" + diretor + '\'' +
+                ", duracao='" + duracao + '\'' +
+                ", dataEstreia=" + dataEstreia +
+                ", caminhoBanner='" + caminhoBanner + '\'' +
+                ", faixaEtaria=" + faixaEtaria +
+                ", idCategoria=" + idCategoria +
+                '}';
     }
-    
 }
