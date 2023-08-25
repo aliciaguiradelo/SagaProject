@@ -31,21 +31,22 @@ public class FilmeController {
         return ResponseEntity.status(HttpStatus.CREATED).body(filme);
     }
 
-    @GetMapping("/categorias/{id}")
-    public ResponseEntity<Filme> show(@PathVariable Long id){
+    @GetMapping("/filmes/{id}")
+    public ResponseEntity<Filme> show(@PathVariable Long id) {
         log.info("mostrar filme com id - " + id);
         var filmeEncontrado = filmes
-                                    .stream()
-                                    .filter((filme) -> filme.getId().equals(id))
-                                    .findFirst();
+                .stream()
+                .filter((filme) -> filme.getId().equals(id))
+                .findFirst();
 
-        if (filmeEncontrado.isEmpty()){
+        if (filmeEncontrado.isEmpty()) {
             return ResponseEntity.notFound().build();
         } else {
             return ResponseEntity.ok(filmeEncontrado.get());
         }
+    }
 
-        @DeleteMapping("/categorias/{id}")
+        @DeleteMapping("/filmes/{id}")
         public ResponseEntity<Object> destroy(@PathVariable Long id){
             log.info("apagando filme com id - " + id);
             var filmeEncontrado = filmes
@@ -82,6 +83,6 @@ public class FilmeController {
 
 
 
-    }
+
 
 }
