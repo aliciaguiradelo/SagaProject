@@ -14,9 +14,8 @@ import java.util.List;
 @RestController
 public class FilmeController {
 
-    List<Filme> filmes = new ArrayList<>();
-
     Logger log = LoggerFactory.getLogger(getClass());
+    List<Filme> filmes = new ArrayList<>();
     
     @GetMapping("/filmes")
     public List<Filme> index () {
@@ -24,7 +23,7 @@ public class FilmeController {
     }
 
     @PostMapping("/filmes")
-    public ResponseEntity<Object> create(@RequestBody Filme filme){
+    public ResponseEntity<Filme> create(@RequestBody Filme filme){
         log.info("cadastrando filme - " + filme);
         filme.setId(filmes.size() + 1L);
         filmes.add(filme);
@@ -41,9 +40,10 @@ public class FilmeController {
 
         if (filmeEncontrado.isEmpty()) {
             return ResponseEntity.notFound().build();
-        } else {
-            return ResponseEntity.ok(filmeEncontrado.get());
         }
+
+        return ResponseEntity.ok(filmeEncontrado.get());
+
     }
 
         @DeleteMapping("/filmes/{id}")
@@ -80,9 +80,5 @@ public class FilmeController {
             return ResponseEntity.ok(filme);
 
         }
-
-
-
-
 
 }
