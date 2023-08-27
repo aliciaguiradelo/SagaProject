@@ -1,56 +1,82 @@
 package br.com.br.saga.model;
 
-import java.util.Objects;
-
 public class Favorito {
+    private Long id;
     private Long idFilme;
     private Long idUsuario;
 
-    public Favorito( Long idFilme, Long idUsuario){
-        this.idFilme=idFilme;
-        this.idUsuario=idUsuario;
+    public Favorito() {
     }
 
-    public Favorito(){
+    public Favorito(Long id, Long idFilme, Long idUsuario) {
+        this.id = id;
+        this.idFilme = idFilme;
+        this.idUsuario = idUsuario;
+    }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getIdFilme() {
         return idFilme;
     }
 
-    public Favorito setIdFilme(Long idFilme) {
+    public void setIdFilme(Long idFilme) {
         this.idFilme = idFilme;
-        return this;
     }
 
     public Long getIdUsuario() {
         return idUsuario;
     }
 
-    public Favorito setIdUsuario(Long idUsuario) {
+    public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
-        return this;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Favorito favorito = (Favorito) o;
-        return Objects.equals(idFilme, favorito.idFilme) && Objects.equals(idUsuario, favorito.idUsuario);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idFilme, idUsuario);
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((idFilme == null) ? 0 : idFilme.hashCode());
+        result = prime * result + ((idUsuario == null) ? 0 : idUsuario.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Favorito other = (Favorito) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        if (idFilme == null) {
+            if (other.idFilme != null)
+                return false;
+        } else if (!idFilme.equals(other.idFilme))
+            return false;
+        if (idUsuario == null) {
+            if (other.idUsuario != null)
+                return false;
+        } else if (!idUsuario.equals(other.idUsuario))
+            return false;
+        return true;
     }
 
     @Override
     public String toString() {
-        return "Favorito{" +
-                "idFilme=" + idFilme +
-                ", idUsuario=" + idUsuario +
-                '}';
+        return "Favorito [id=" + id + ", idFilme=" + idFilme + ", idUsuario=" + idUsuario + "]";
     }
 }
