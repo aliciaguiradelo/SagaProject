@@ -16,14 +16,14 @@ public class FilmeController {
 
     Logger log = LoggerFactory.getLogger(getClass());
     List<Filme> filmes = new ArrayList<>();
-    
+
     @GetMapping("/filmes")
-    public List<Filme> index () {
+    public List<Filme> Listar() {
         return filmes;
     }
 
     @PostMapping("/filmes")
-    public ResponseEntity<Filme> create(@RequestBody Filme filme){
+    public ResponseEntity<Filme> Criar(@RequestBody Filme filme) {
         log.info("cadastrando filme - " + filme);
         filme.setId(filmes.size() + 1L);
         filmes.add(filme);
@@ -31,7 +31,7 @@ public class FilmeController {
     }
 
     @GetMapping("/filmes/{id}")
-    public ResponseEntity<Filme> show(@PathVariable Long id) {
+    public ResponseEntity<Filme> BuscarPorId(@PathVariable Long id) {
         log.info("mostrar filme com id - " + id);
         var filmeEncontrado = filmes
                 .stream()
@@ -43,42 +43,39 @@ public class FilmeController {
         }
 
         return ResponseEntity.ok(filmeEncontrado.get());
-
     }
 
-        @DeleteMapping("/filmes/{id}")
-        public ResponseEntity<Object> destroy(@PathVariable Long id){
-            log.info("apagando filme com id - " + id);
-            var filmeEncontrado = filmes
-                    .stream()
-                    .filter( (filme) -> filme.getId().equals(id))
-                    .findFirst();
+    @DeleteMapping("/filmes/{id}")
+    public ResponseEntity<Object> Deletar(@PathVariable Long id) {
+        log.info("apagando filme com id - " + id);
+        var filmeEncontrado = filmes
+                .stream()
+                .filter((filme) -> filme.getId().equals(id))
+                .findFirst();
 
-            if (filmeEncontrado.isEmpty()){
-                return ResponseEntity.notFound().build();
-            }
-            filmes.remove(filmeEncontrado.get());
-            return ResponseEntity.noContent().build();
+        if (filmeEncontrado.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        filmes.remove(filmeEncontrado.get());
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/filmes/{id}")
+    public ResponseEntity<Filme> Atualizar(@PathVariable Long id, @RequestBody Filme filme) {
+        log.info("atualizando filme com id - " + id);
+        var filmeEncontrado = filmes
+                .stream()
+                .filter((c) -> c.getId().equals(id))
+                .findFirst();
+
+        if (filmeEncontrado.isEmpty()) {
+            return ResponseEntity.notFound().build();
         }
 
-        @PutMapping("/filmes/{id}")
-        public ResponseEntity<Filme> update(@PathVariable Long id, @RequestBody Filme filme){
-            log.info("atualizando filme com id - " + id);
-            var filmeEncontrado = filmes
-                    .stream()
-                    .filter((c) -> c.getId().equals(id))
-                    .findFirst();
+        filmes.remove(filmeEncontrado.get());
+        filme.setId(id);
+        filmes.add(filme);
 
-            if (filmeEncontrado.isEmpty()){
-                return ResponseEntity.notFound().build();
-            }
-
-            filmes.remove(filmeEncontrado.get());
-            filme.setId(id);
-            filmes.add(filme);
-
-            return ResponseEntity.ok(filme);
-
-        }
-
+        return ResponseEntity.ok(filme);
+    }
 }

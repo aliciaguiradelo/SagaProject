@@ -1,12 +1,12 @@
 package br.com.br.saga.controllers;
 
-import br.com.br.saga.model.CategoriaFilme;
-import br.com.br.saga.model.Filme;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import br.com.br.saga.model.CategoriaFilme;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +18,12 @@ public class CategoriaFilmesController {
     List<CategoriaFilme> categorias = new ArrayList<>();
 
     @GetMapping("/categorias")
-    public List<CategoriaFilme> index() {
+    public List<CategoriaFilme> Listar() {
         return categorias;
     }
 
     @PostMapping("/categorias")
-    public ResponseEntity<CategoriaFilme> create(@RequestBody CategoriaFilme categoria){
+    public ResponseEntity<CategoriaFilme> Cadastrar(@RequestBody CategoriaFilme categoria) {
         log.info("cadastrando categoria - " + categoria);
         categoria.setId(categorias.size() + 1L);
         categorias.add(categoria);
@@ -31,7 +31,7 @@ public class CategoriaFilmesController {
     }
 
     @GetMapping("/categorias/{id}")
-    public ResponseEntity<CategoriaFilme> show(@PathVariable Long id) {
+    public ResponseEntity<CategoriaFilme> BuscarPorId(@PathVariable Long id) {
         log.info("mostrar categoria com id - " + id);
         var categoriaEncontrada = categorias
                 .stream()
@@ -47,14 +47,14 @@ public class CategoriaFilmesController {
     }
 
     @DeleteMapping("/categorias/{id}")
-    public ResponseEntity<Object> destroy(@PathVariable Long id){
+    public ResponseEntity<Object> Deletar(@PathVariable Long id) {
         log.info("apagando categoria com id - " + id);
         var categoriaEncontrada = categorias
                 .stream()
-                .filter( (categoria) -> categoria.getId().equals(id))
+                .filter((categoria) -> categoria.getId().equals(id))
                 .findFirst();
 
-        if (categoriaEncontrada.isEmpty()){
+        if (categoriaEncontrada.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         categorias.remove(categoriaEncontrada.get());
@@ -62,14 +62,14 @@ public class CategoriaFilmesController {
     }
 
     @PutMapping("/categorias/{id}")
-    public ResponseEntity<CategoriaFilme> update(@PathVariable Long id, @RequestBody CategoriaFilme categoria ){
+    public ResponseEntity<CategoriaFilme> Atualizar (@PathVariable Long id, @RequestBody CategoriaFilme categoria) {
         log.info("atualizando categoria com id - " + id);
         var categoriaEncontrada = categorias
                 .stream()
                 .filter((c) -> c.getId().equals(id))
                 .findFirst();
 
-        if (categoriaEncontrada.isEmpty()){
+        if (categoriaEncontrada.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
@@ -78,7 +78,5 @@ public class CategoriaFilmesController {
         categorias.add(categoria);
 
         return ResponseEntity.ok(categoria);
-
     }
-
 }
