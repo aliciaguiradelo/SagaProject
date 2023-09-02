@@ -8,10 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.com.br.saga.model.CategoriaFilme;
-import br.com.br.saga.model.Usuario;
 import br.com.br.saga.repository.CategoriaFilmeRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
