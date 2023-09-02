@@ -1,6 +1,11 @@
 package br.com.br.saga.model;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Favorito {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long idFilme;
     private Long idUsuario;

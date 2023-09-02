@@ -3,7 +3,12 @@ package br.com.br.saga.model;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Filme {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String titulo;
     private String sinopse;
