@@ -1,8 +1,13 @@
 package br.com.br.saga.model;
 
+import jakarta.persistence.*;
+
 import java.util.Objects;
 
+@Entity
 public class CategoriaFilme {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nomeCategoria;
 
