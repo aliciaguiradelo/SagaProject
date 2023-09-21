@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import br.com.br.saga.model.CategoriaFilme;
 import br.com.br.saga.repository.CategoriaFilmeRepository;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class CategoriaFilmesController {
     }
 
     @PostMapping("/categorias")
-    public ResponseEntity<CategoriaFilme> Cadastrar(@RequestBody CategoriaFilme categoria) {
+    public ResponseEntity<CategoriaFilme> Cadastrar(@RequestBody @Valid CategoriaFilme categoria) {
         log.info("cadastrando categoria - " + categoria);
         repository.save(categoria);
         return ResponseEntity.status(HttpStatus.CREATED).body(categoria);

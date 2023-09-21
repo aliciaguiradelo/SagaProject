@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import br.com.br.saga.model.Usuario;
 import br.com.br.saga.repository.UsuarioRepository;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/usuarios")
-    public ResponseEntity<Usuario> Cadastrar(@RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> Cadastrar(@RequestBody @Valid Usuario usuario) {
         log.info("cadastrando usuario - " + usuario);
         repository.save(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuario);

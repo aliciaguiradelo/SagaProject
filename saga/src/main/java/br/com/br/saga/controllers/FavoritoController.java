@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import br.com.br.saga.model.Favorito;
 import br.com.br.saga.repository.FavoritoRepository;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class FavoritoController {
     }
 
     @PostMapping("/favoritos")
-    public ResponseEntity<Favorito> Cadastrar(@RequestBody Favorito favorito) {
+    public ResponseEntity<Favorito> Cadastrar(@RequestBody @Valid Favorito favorito) {
         log.info("cadastrando favorito - " + favorito);
         repository.save(favorito);
         return ResponseEntity.status(HttpStatus.CREATED).body(favorito);
