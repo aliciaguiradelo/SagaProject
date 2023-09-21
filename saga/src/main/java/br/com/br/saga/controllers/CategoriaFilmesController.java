@@ -1,7 +1,5 @@
 package br.com.br.saga.controllers;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,25 +7,26 @@ import org.springframework.web.bind.annotation.*;
 
 import br.com.br.saga.model.CategoriaFilme;
 import br.com.br.saga.repository.CategoriaFilmeRepository;
+import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@Slf4j
 public class CategoriaFilmesController {
-
-    Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
     CategoriaFilmeRepository repository;
 
     @GetMapping("/categorias")
     public List<CategoriaFilme> Listar() {
+        log.info("Listando todos as categorias");
         return repository.findAll();
     }
 
     @PostMapping("/categorias")
-    public ResponseEntity<CategoriaFilme> Cadastrar(@RequestBody CategoriaFilme categoria) {
+    public ResponseEntity<CategoriaFilme> Cadastrar(@RequestBody @Valid CategoriaFilme categoria) {
         log.info("cadastrando categoria - " + categoria);
         repository.save(categoria);
         return ResponseEntity.status(HttpStatus.CREATED).body(categoria);
@@ -44,7 +43,9 @@ public class CategoriaFilmesController {
     @DeleteMapping("/categorias/{id}")
     public ResponseEntity<Object> Deletar(@PathVariable Long id) {
         log.info("apagando categoria com id - " + id);
+
         repository.delete(getCategoria(id));
+
         return ResponseEntity.noContent().build();
     }
 
@@ -59,6 +60,7 @@ public class CategoriaFilmesController {
 
         return ResponseEntity.ok(categoria);
     }
+
     private CategoriaFilme getCategoria(Long id) {
         return repository.findById(id).orElseThrow(() -> {
             return new RuntimeException();
