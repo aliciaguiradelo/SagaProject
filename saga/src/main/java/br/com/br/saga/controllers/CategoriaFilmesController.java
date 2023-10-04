@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @Slf4j
 public class CategoriaFilmesController {
-    
+
     @Autowired
     CategoriaFilmeRepository repository;
 
@@ -43,7 +43,7 @@ public class CategoriaFilmesController {
     @DeleteMapping("/categorias/{id}")
     public ResponseEntity<Object> Deletar(@PathVariable Long id) {
         log.info("apagando categoria com id - " + id);
-        
+
         repository.delete(getCategoria(id));
 
         return ResponseEntity.noContent().build();
@@ -52,7 +52,7 @@ public class CategoriaFilmesController {
     @PutMapping("/categorias/{id}")
     public ResponseEntity<CategoriaFilme> Atualizar (@PathVariable Long id, @RequestBody CategoriaFilme categoria) {
         log.info("atualizando categoria com id - " + id);
-        
+
         getCategoria(id);
 
         categoria.setId(id);
