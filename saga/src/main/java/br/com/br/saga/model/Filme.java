@@ -38,13 +38,13 @@ public class Filme {
     private String duracao;
     
     @Past(message = "A data de estreia deve estar no passado.")
-    @NotNull
+    @NotNull(message = "A data de estreia não pode estar em branco.")
     private LocalDate dataEstreia;
     
     @NotBlank(message = "A caminho do banner não pode estar em branco.")
     private String caminhoBanner;
 
-    @Min(value = 0, message = "O valor deve ser positivo.")
+    @Min(value = 10, message = "O valor deve ser acima de 10 anos.")
     @Max(value = 18, message = "A faixa etária máxima permitida é 18 anos.")
     private int faixaEtaria;
 
