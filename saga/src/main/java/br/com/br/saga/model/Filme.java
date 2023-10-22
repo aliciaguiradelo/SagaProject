@@ -1,6 +1,9 @@
 package br.com.br.saga.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
@@ -48,6 +51,52 @@ public class Filme {
     @Max(value = 18, message = "A faixa etária máxima permitida é 18 anos.")
     private int faixaEtaria;
 
-    @NotNull(message = "O ID da categoria não pode ser nulo.")
-    private Long idCategoria;
+    @NotNull(message = "A categoria não pode ser nulo.")
+    @ManyToOne
+    private CategoriaFilme categoria;
+
+    public Filme withId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public Filme withTitulo(String titulo) {
+        this.titulo = titulo;
+        return this;
+    }
+
+    public Filme withSinopse(String sinopse) {
+        this.sinopse = sinopse;
+        return this;
+    }
+
+    public Filme withDiretor(String diretor) {
+        this.diretor = diretor;
+        return this;
+    }
+
+    public Filme withDuracao(String duracao) {
+        this.duracao = duracao;
+        return this;
+    }
+
+    public Filme withDataEstreia(LocalDate dataEstreia) {
+        this.dataEstreia = dataEstreia;
+        return this;
+    }
+
+    public Filme withCaminhoBanner(String caminhoBanner) {
+        this.caminhoBanner = caminhoBanner;
+        return this;
+    }
+
+    public Filme withFaixaEtaria(int faixaEtaria) {
+        this.faixaEtaria = faixaEtaria;
+        return this;
+    }
+
+    public Filme withCategoria(CategoriaFilme categoria) {
+        this.categoria = categoria;
+        return this;
+    }
 }
