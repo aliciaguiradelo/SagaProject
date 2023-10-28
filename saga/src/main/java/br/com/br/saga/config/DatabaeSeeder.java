@@ -1,6 +1,5 @@
 package br.com.br.saga.config;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -44,7 +43,6 @@ public class DatabaeSeeder implements CommandLineRunner {
                     .withCaminhoBanner("BlackMirror")
                     .withFaixaEtaria(18)
                     .withCategoria(suspense),
-
                 new Filme()
                     .withTitulo("Bill Gates")
                     .withSinopse("Biografia do homem que já teve o posto de mais rico do mundo")
