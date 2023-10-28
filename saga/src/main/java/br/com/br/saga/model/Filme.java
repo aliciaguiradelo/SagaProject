@@ -1,6 +1,9 @@
 package br.com.br.saga.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
@@ -38,16 +41,62 @@ public class Filme {
     private String duracao;
     
     @Past(message = "A data de estreia deve estar no passado.")
-    @NotNull
+    @NotNull(message = "A data de estreia não pode estar em branco.")
     private LocalDate dataEstreia;
     
     @NotBlank(message = "A caminho do banner não pode estar em branco.")
     private String caminhoBanner;
 
-    @Min(value = 0, message = "O valor deve ser positivo.")
+    @Min(value = 10, message = "O valor deve ser acima de 10 anos.")
     @Max(value = 18, message = "A faixa etária máxima permitida é 18 anos.")
     private int faixaEtaria;
 
-    @NotNull(message = "O ID da categoria não pode ser nulo.")
-    private Long idCategoria;
+    @NotNull(message = "A categoria não pode ser nulo.")
+    @ManyToOne
+    private CategoriaFilme categoria;
+
+    public Filme withId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public Filme withTitulo(String titulo) {
+        this.titulo = titulo;
+        return this;
+    }
+
+    public Filme withSinopse(String sinopse) {
+        this.sinopse = sinopse;
+        return this;
+    }
+
+    public Filme withDiretor(String diretor) {
+        this.diretor = diretor;
+        return this;
+    }
+
+    public Filme withDuracao(String duracao) {
+        this.duracao = duracao;
+        return this;
+    }
+
+    public Filme withDataEstreia(LocalDate dataEstreia) {
+        this.dataEstreia = dataEstreia;
+        return this;
+    }
+
+    public Filme withCaminhoBanner(String caminhoBanner) {
+        this.caminhoBanner = caminhoBanner;
+        return this;
+    }
+
+    public Filme withFaixaEtaria(int faixaEtaria) {
+        this.faixaEtaria = faixaEtaria;
+        return this;
+    }
+
+    public Filme withCategoria(CategoriaFilme categoria) {
+        this.categoria = categoria;
+        return this;
+    }
 }
