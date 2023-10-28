@@ -1,6 +1,10 @@
 package br.com.br.saga.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,8 +14,6 @@ import br.com.br.saga.repository.FilmeRepository;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
-
 @RestController
 @Slf4j
 public class FilmeController {
@@ -20,9 +22,16 @@ public class FilmeController {
     FilmeRepository repository;
 
     @GetMapping("/filmes")
-    public List<Filme> Listar() {
+    public Page<Filme> Listar(
+            @PageableDefault(size = 5, sort = "dataEstreia", direction = Sort.Direction.DESC) Pageable pageRequest,
+            @RequestParam(required = false) String titulo
+    ) {
         log.info("Listando todos os filems");
-        return repository.findAll();
+
+        if (titulo == null || titulo.isEmpty())
+            return repository.findAll(pageRequest);
+
+        return repository.findByTituloContainingIgnoreCase(titulo, pageRequest);
     }
 
     @PostMapping("/filmes")
