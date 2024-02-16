@@ -1,11 +1,13 @@
 package br.com.br.saga.config;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import br.com.br.saga.model.CategoriaFilme;
 import br.com.br.saga.model.Filme;
@@ -13,6 +15,7 @@ import br.com.br.saga.repository.CategoriaFilmeRepository;
 import br.com.br.saga.repository.FilmeRepository;
 
 @Configuration
+@Profile("dev")
 public class DatabaeSeeder implements CommandLineRunner {
 
     @Autowired
