@@ -12,6 +12,8 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -78,4 +80,7 @@ public class Usuario implements UserDetails {
         return true;
     }
 
+    public Authentication toAuthentication() {
+        return new UsernamePasswordAuthenticationToken(email, null,getAuthorities());
+    }
 }
